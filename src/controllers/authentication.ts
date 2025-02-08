@@ -12,8 +12,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const user = await getUserByEmail(email).select('+authentication.salt +authentication');
-
+    const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
+    console.log('user', user);
+    
     if (!user) {
       res.sendStatus(400);
       return;
