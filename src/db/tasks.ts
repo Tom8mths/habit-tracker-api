@@ -5,14 +5,14 @@ const { Schema, Document } = mongoose;
 interface ITask extends Document {
   userId: mongoose.Types.ObjectId,
   title: string;
-  occurrence: "daily" | "weekly" | "monthly" | "alternate days";
+  occurrence: "daily" | "weekly" | "monthly" | "alternate";
   category: string;
   date: Date;
 }
 
 const TaskSchema = new Schema<ITask>({
   title: { type: String, required: true, trim: true },
-  occurrence: { type: String, enum: ["daily", "weekly", "monthly", "alternate days"], required: true},
+  occurrence: { type: String, enum: ["daily", "weekly", "monthly", "alternate"], required: true},
   category: { type: String, required: true, trim: true },
   date: {
     type: Date,

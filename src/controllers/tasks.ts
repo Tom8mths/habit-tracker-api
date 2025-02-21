@@ -6,7 +6,7 @@ export const getAllTasks = async (req: Request, res: Response): Promise<void> =>
   try {
     const currentUserId = get(req, 'identity._id') as string;
     const tasks = await getTasks(currentUserId);
-
+    
     res.status(200).json(tasks);
   } catch (error) {
     console.log(error);
