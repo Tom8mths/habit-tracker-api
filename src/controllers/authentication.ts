@@ -32,7 +32,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     await user.save();
 
-    res.cookie('TOMATE-AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/' });
+    res.cookie('TOMATE-AUTH', user.authentication.sessionToken, { httpOnly: true, domain: 'localhost', path: '/'});
 
     res.status(200).json(user).end();
   } catch (error) {
