@@ -3,5 +3,5 @@ import { isAuthenticated } from '../middlewares';
 import { getAIResponse } from '../controllers/ai';
 
 export default (router: express.Router) => {
-  router.get('/habot', isAuthenticated, getAIResponse);
+  router.post('/habot', isAuthenticated, getAIResponse);
 }
