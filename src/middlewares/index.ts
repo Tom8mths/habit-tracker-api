@@ -58,7 +58,6 @@ export const isTaskOwner = async (req: Request, res: Response, next: NextFunctio
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    console.log('foi1');
     const sessionToken = req.cookies['TOMATE-AUTH'];
     if (!sessionToken) {
       res.status(403).json({message: "User not authenticated"}).end();
