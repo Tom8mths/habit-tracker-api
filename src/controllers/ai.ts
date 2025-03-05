@@ -10,7 +10,7 @@ interface Message {
 
 export const getAIResponse = async (req: Request, res: Response): Promise<void> => {
   try {
-    const question = req.query.question as string;
+    const question = req.body.question as string;
     fs.readFile("src/documentation/features.txt", "utf8", async (error, data) => {
       if (error) {
         console.error("Error reading the file:", error);
