@@ -23,9 +23,11 @@ export const getAIResponse = async (req: Request, res: Response): Promise<void> 
         const prompt = [];
 
         prompt.push(
-          "You are a compny's support specialist available to answer any question. Only answer from the following company details and nothing else."
+          "Your job is to extract task information from the user's message. If the message contains a task, return a JSON object with the task fields"
         );
-        prompt.push("Politely decline if the question does not match the following:");
+        prompt.push(
+          "If the message doesn't have enough information to create a task, ask the user for more information acting as an assistant for the user."
+        );
         prompt.push(data);
 
         const messages: Message[] = [
