@@ -28,6 +28,12 @@ export const getAIResponse = async (req: Request, res: Response): Promise<void> 
         prompt.push(
           "If the message doesn't have enough information to create a task, ask the user for more information acting as an assistant for the user."
         );
+        prompt.push(
+          "Do not use tecnical terms with the user such as JSON, Backend or Endpoint and things like that."
+        );
+        prompt.push(
+          "You need to try to create the task with the least information you have, and be brief with the user"
+        );
         prompt.push(data);
 
         const messages: Message[] = [
@@ -46,7 +52,7 @@ export const getAIResponse = async (req: Request, res: Response): Promise<void> 
           messages: messages,
         });
 
-        const aiResponse = completion.choices[0].message.content;
+        const aiResponse = completion.choices[0].message;
 
         res.json({aiResponse})
       } else {

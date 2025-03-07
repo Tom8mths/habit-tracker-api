@@ -18,6 +18,9 @@ export const createNewTask = async (req: Request, res: Response): Promise<void> 
   try {
     const currentUserId = get(req, "identity._id") as string;
     const values = req.body;
+    console.log('values', values);
+    if (!values.title) res.status(400).json({error: 'Title is required'}).end()
+    
 
     const newTask =  await createTask(values, currentUserId);
     res.status(200).json(newTask).end();
