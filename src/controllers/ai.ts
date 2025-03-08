@@ -20,26 +20,22 @@ export const getAIResponse = async (req: Request, res: Response): Promise<void> 
         const openai = new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: "https://api.groq.com/openai/v1" });
         const aiModel = "llama-3.3-70b-versatile";
 
-        const prompt = [];
-
-        prompt.push(
-          "Your job is to extract task information from the user's message. If the message contains a task, return a JSON object with the task fields"
-        );
-        prompt.push(
-          "If the message doesn't have enough information to create a task, ask the user for more information acting as an assistant for the user."
-        );
-        prompt.push(
-          "Do not use tecnical terms with the user such as JSON, Backend or Endpoint and things like that."
-        );
-        prompt.push(
-          "You need to try to create the task with the least information you have, and be brief with the user"
-        );
-        prompt.push(data);
+        const systemPrompt = [
+          "You are a helpful assistant that helps users create tasks in a task management application.",
+          "Your job is to extract task information from the user's message. If you can identify a task, respond with:",
+          "1. A friendly confirmation of the task details",
+          "2. The JSON data you're returning I'm trimming it out of the message that the user reads, so he is not seeing it",
+          "If the user's message doesn't have enough information to create a task, just ask for the missing information",
+          "in a friendly, conversational way. Don't mention JSON, backend, or technical terms.",
+          "If the user doesn't appear to be asking about creating a task, respond appropriately without mentioning tasks.",
+          "Keep your responses brief and friendly.",
+          data
+        ].join("\n");
 
         const messages: Message[] = [
           {
             role: "system",
-            content: prompt.join(" "),
+            content: systemPrompt
           },
           {
             role: "user",

@@ -1,11 +1,11 @@
 Habt is an app designed for you to take control of your daily routines. the AI-powered habit tracker designed to simplify and personalize your self-care journey.
 Whether you’re managing your skincare routine, medication, whey protein intake, or any other daily habit, Habt helps you stay consistent and organized with minimal effort.
 
-When creating a new routine (task), this is how it should be sent to the Back-End 
+When creating a new routine (task),  A JSON object with the task details in this exact format:
 {
   "title": "Short task title" in string,
   "description": "Detailed task description" in string,
   "occurrence": "daily" | "weekly" | "monthly" | "alternate" in string;
   "category": "Task category" in string;
-  "date": Date;
+  "date": Date - Not required;
 }
